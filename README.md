@@ -12,7 +12,7 @@ The project uses the Create-React-App in creating the starter template.
 The `create-react-app` command can be issued at your favourite command line tool only when Node is installed or you can use npm.
 
 Clone the app from my GitHub repo using the command 
-```git clone https://github.com/bafrimpong/would_you_rather.git && npm install```
+```git clone https://github.com/bafrimpong/would_you_rather_app.git && npm install```
 
 When all the dependencies are installed, launch the app with
 
