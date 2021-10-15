@@ -58,8 +58,11 @@ export function handleAddAnswer(_id, _answer) {
         const { authenticatedUser } = getState();
 
         return _saveQuestionAnswer({
-            authenticatedUser: authenticatedUser,
-            questionId: _id,
+            // authenticatedUser: authenticatedUser,
+            // questionId: _id,
+            // answer: _answer
+            authedUser: authenticatedUser,
+            qid: _id,
             answer: _answer
         }).then(dispatch(addAnswerAction(_id, _answer, authenticatedUser))
         ).then( dispatch(addAnswerForAuthenticatedUser(authenticatedUser, _id, _answer)))

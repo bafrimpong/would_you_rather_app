@@ -7,7 +7,6 @@ import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import reducer from '../src/reducers'
 import middleware from '../src/middleware'
-import { BrowserRouter } from 'react-router-dom';
 
 // create the store
 const store = createStore(reducer, middleware)
