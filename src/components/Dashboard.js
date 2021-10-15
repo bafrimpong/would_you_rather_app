@@ -4,6 +4,7 @@ import { Redirect } from 'react-router';
 import { connect } from "react-redux";
 import DashboardAppBar from './DashboardAppBar';
 import { setAuthenticatedUser } from '../actions/authenticatedUser';
+import { v1 as UUID_V1 } from 'uuid';
 
 // mui import
 import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
@@ -32,6 +33,7 @@ import { Button } from '@mui/material';
 
 const drawerWidth = 240;
 const mdTheme = createTheme();
+
 class Dashboard extends Component {
     constructor(props) {
         super(props)
@@ -246,7 +248,7 @@ class Dashboard extends Component {
                         <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
                             <Grid container spacing={3}>
                                 <Grid item xs={12} md={8} lg={8}>
-                                    <Paper
+                                    <Paper key={UUID_V1()}
                                         sx={{
                                             p: 2, display: 'flex', flexDirection: 'column', height: 240,
                                         }}
@@ -263,7 +265,7 @@ class Dashboard extends Component {
 
                                 {/* user profile */}
                                 <Grid item xs={12} md={4} lg={4}>
-                                    <Paper
+                                    <Paper key={UUID_V1()}
                                         sx={{
                                             p: 2, display: 'flex', flexDirection: 'column', height: 240,
                                         }}
@@ -273,7 +275,7 @@ class Dashboard extends Component {
                                 </Grid>
 
                                 <Grid item xs={12}>
-                                    <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
+                                    <Paper key={UUID_V1()} sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
                                         {/* ACCORDION FOR ANSWERED QUESTIONS */}
                                         {this.isQuestionAnswered = true}
                                         {

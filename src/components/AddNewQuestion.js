@@ -8,6 +8,7 @@ import Paper from '@mui/material/Paper';
 import { Avatar, Button, CssBaseline, Divider, FormControl, Grid, TextField, Typography } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Redirect } from 'react-router';
+import { Link } from 'react-router-dom';
 
 const theme = createTheme();
 class AddNewQuestion extends Component {
@@ -145,6 +146,10 @@ class AddNewQuestion extends Component {
                                 >
                                     Save Question
                                 </Button>
+                                <Link to={`/`} style={{ textDecoration: 'none' }}
+                                >
+                                    <Button variant="outlined">Cancel</Button>
+                                </Link>
                             </FormControl>
                         </Box>
                     </Grid>

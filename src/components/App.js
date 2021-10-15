@@ -13,6 +13,7 @@ import Dashboard from './Dashboard';
 import LeaderBoard from './LeaderBoard';
 import AddNewQuestion from './AddNewQuestion';
 import QuestionMaster from './QuestionMaster';
+import PageNotFound from './PageNotFound';
 class App extends Component {
 
   componentDidMount() {
@@ -30,6 +31,7 @@ class App extends Component {
             <Route key='add' path='/add' component={AddNewQuestion} />
             <Route key='leaderboard' path='/leaderboard' component={LeaderBoard} />
             <Route key='question' path='/question/:id' component={QuestionMaster} />
+            <Route render={() => <PageNotFound />} />
           </Switch>
           )  
           : null
