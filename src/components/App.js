@@ -25,10 +25,10 @@ class App extends Component {
         {this.props.loading !== null ?
           (
           <Switch>
+            <Route key='dashboard' exact path='/' component={Dashboard} />
             <Route key='login' path='/login' component={SigninPage} />
             <Route key='add' path='/add' component={AddNewQuestion} />
             <Route key='leaderboard' path='/leaderboard' component={LeaderBoard} />
-            <Route key='dashboard' exact path='/' component={Dashboard} />
             <Route key='question' path='/question/:id' component={QuestionMaster} />
           </Switch>
           )  

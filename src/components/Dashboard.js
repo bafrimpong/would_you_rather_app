@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { withRouter, Link } from "react-router-dom";
+import { Redirect } from 'react-router';
 import { connect } from "react-redux";
 import DashboardAppBar from './DashboardAppBar';
 import { setAuthenticatedUser } from '../actions/authenticatedUser';
@@ -39,6 +40,7 @@ class Dashboard extends Component {
             expanded: false
         }
 
+        this.isValidForRedirectToSigninPage = this.isValidForRedirectToSigninPage.bind(this)
         this.computeObjectLength = this.computeObjectLength.bind(this);
         this.handleLogOut = this.handleLogOut.bind(this)
         this.isQuestionAnswered = true;
@@ -57,16 +59,20 @@ class Dashboard extends Component {
     }
 
     /**
-     * 
-     * @param {*} currentUser 
-     * @returns 
+     * Evaluates on provided parameters and returns `true` which is valid for page redirection
+     * or `false` to render the dashboard component
+     * @param {*} currentUser the current user or `authenticatedUser`
+     * @param {*} _answeredData answered questions object
+     * @param {*} _unansweredData unanswered questions object
+     * @returns a boolean
      */
-    redirectToSigninPage = (currentUser) => {
-        if (currentUser === "" || currentUser === null) {
-            return (
-                this.props.history.push('/login')
-            )
-        }
+    isValidForRedirectToSigninPage = (currentUser, _answeredData, _unansweredData) => {
+        let _isValid = false;
+        _isValid = (currentUser === "" || currentUser === null) 
+                    || (_unansweredData === undefined || _unansweredData === null) 
+                    || (_answeredData === undefined || _answeredData === null);
+
+        return _isValid;
     }
 
     /**
@@ -152,15 +158,19 @@ class Dashboard extends Component {
      */
     computeObjectLength(_object) {
         let _length = 0;
-        if (typeof(Object.keys(_object)) !== 'undefined' || _object !== null) {
-            _length = Object.keys(_object).length
+        if ((_object === null) || (_object === undefined)) {
+            return _length;
+        } else {
+            if (typeof (Object.keys(_object)) !== 'undefined' || _object !== null) {
+                _length = Object.keys(_object).length
+            }
+            return _length
         }
-        return _length;
     }
 
     /**
-  * Logs or signs out a user and redirect to the signin page
-  */
+    * Logs or signs out a user and redirect to the signin page
+    */
     handleLogOut = () => {
         this.props.dispatch(setAuthenticatedUser(""))
         this.props.history.push('/login')
@@ -176,7 +186,12 @@ class Dashboard extends Component {
         console.log("DASHBOARD PROPS", this.props)
 
         // redirect to sign-in page if user is not logged-in
-        this.redirectToSigninPage(authenticatedUser);
+        const isValidForRedirection = this.isValidForRedirectToSigninPage(authenticatedUser, _answeredQuestions, _unansweredQuestions);
+        if(isValidForRedirection === true){
+            return (
+                <Redirect to={'/login'} />
+            );
+        }
 
         const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
             ({ theme, open }) => ({

@@ -34,6 +34,7 @@ class QuestionMaster extends Component {
             return <Redirect to={'/'} />
         }
 
+        // check if authenticatedUser has questions already answered
         const isQuestionAnswered = this.getAnsweredQuestions(authenticatedUser, users, question)
 
         return (
